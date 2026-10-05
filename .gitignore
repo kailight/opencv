@@ -9,4 +9,16 @@ yarn-error.log*
 .pnp.js
 /.idea
 
+# NEST
+## compiled output
+/backend/dist
+/backend/node_modules
+/backend/build
+## dotenv environment variable files
+/backend/.env
+/backend/.env.development.local
+/backend/.env.test.local
+/backend/.env.production.local
+/backend/.env.local
+
 .vscode/*
