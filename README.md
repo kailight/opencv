@@ -18,7 +18,12 @@
 ### After editing schema.prisma
 
 10. `npx prisma migrate dev --name init` // The datasource property `url` is no longer supported in schema files.
+11. `nest g module prisma`
+12. `nest g service prisma --no-spec`
+13. `pnpm install @prisma/adapter-mariadb` // oops forgot mysql adapter
+14. `pnpm install @nestjs/serve-static` // next proxy to nuxt fe
 
+`robocopy "c:\dev\kailight\frontend\.output\public" "c:\dev\kailight\backend\client" /E`
 
 # Thoughts
 
