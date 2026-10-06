@@ -4,6 +4,7 @@ import { ApolloDriver, ApolloDriverConfig } from '@nestjs/apollo';
 import { join } from 'path';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
+import { UsersModule } from './users/users.module.js';
 
 @Module({
   imports: [
@@ -12,6 +13,7 @@ import { AppService } from './app.service.js';
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // Saves schema to file system
       // autoSchemaFile: true, // to keep schema in-memory
     }),
+    UsersModule,
   ],
   controllers: [AppController],
   providers: [AppService],

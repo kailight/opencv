@@ -1,0 +1,23 @@
+# ------------------------------------------------------
+# THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
+# ------------------------------------------------------
+
+type User {
+  id: Int!
+  firstName: String
+  lastName: String
+  nickName: String
+  email: String
+  password: String
+  phone: String
+  telegram: String
+  city: String
+  country: String
+  about: String
+  content: String
+}
+
+type Query {
+  users: [User!]!
+  user(id: Int!): User
+}
