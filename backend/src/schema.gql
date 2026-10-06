@@ -21,3 +21,7 @@ type Query {
   users: [User!]!
   user(id: Int!): User
 }
+
+type Mutation {
+  createUser(firstName: String!, lastName: String!, nickName: String!, email: String!, password: String!, phone: String!, telegram: String!, city: String!, country: String!, about: String!): User!
+}

@@ -5,6 +5,7 @@ import { join } from 'path';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
+import { PrismaModule } from './prisma/prisma.module.js';
 
 @Module({
   imports: [
@@ -14,6 +15,7 @@ import { UsersModule } from './users/users.module.js';
       // autoSchemaFile: true, // to keep schema in-memory
     }),
     UsersModule,
+    PrismaModule,
   ],
   controllers: [AppController],
   providers: [AppService],
