@@ -23,8 +23,12 @@
 13. `pnpm install @prisma/adapter-mariadb` // oops forgot mysql adapter
 14. `pnpm install @nestjs/serve-static` // next proxy to nuxt fe
 
+# Useful commands
 `robocopy "c:\dev\kailight\frontend\.output\public" "c:\dev\kailight\backend\client" /E`
 
-# Thoughts
+# Workflow
 
-1. todo
+1. created nestjs, added graphql, created user model, resolver, etc
+2. added prisma, created schema
+3. added nuxt, hardcoded cv a bit, querying graphql from it, moving the data to the database atm
+4. created skills resolver with many-to-many connection (we are here)
