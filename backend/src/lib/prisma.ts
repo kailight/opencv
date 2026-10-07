@@ -7,7 +7,7 @@ const prismaClientSingleton = () => {
     port: Number(process.env.DATABASE_PORT) || 3306,
     user: process.env.DATABASE_USER || 'root',
     password: process.env.DATABASE_PASSWORD || '',
-    database: process.env.DATABASE_NAME,
+    database: process.env.DATABASE_NAME || 'opencv',
     connectionLimit: process.env.NODE_ENV === 'production' ? 10 : 2, // Keeps connections low during dev
   });
 

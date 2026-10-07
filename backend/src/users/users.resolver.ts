@@ -1,8 +1,8 @@
-import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, ResolveField, Parent, Args, Int } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
-import { PRISMA_TOKEN } from '../prisma/prisma.module.js';
-import { PrismaService} from "../prisma/prisma.service.js";
-import { User } from './models/user.model.js';
+import { PRISMA_TOKEN } from '@/prisma/prisma.module.js';
+import { User } from '@/users/models/user.model.js';
+import { Skill } from '@/skills/models/skill.model.js';
 import type { PrismaClient } from '../../src/generated/client/index.js';
 
 @Resolver(() => User)
@@ -22,6 +22,18 @@ export class UsersResolver {
     return this.prisma.user.findUnique({
       where: { id },
     });
+  }
+
+  @ResolveField(() => [Skill], { name: 'skills' })
+  async getSkills(@Parent() user: User) {
+    const { id } = user;
+
+    if (!user || !id) {
+      return [];
+    }
+
+    // Using Prisma's relation fluent API to fetch the connected skills
+    return this.prisma.user.findUnique({ where: { id } }).skills();
   }
 
   @Mutation(() => User)

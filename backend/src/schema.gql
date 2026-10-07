@@ -2,6 +2,11 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type Skill {
+  id: Int!
+  title: String!
+}
+
 type User {
   id: Int!
   firstName: String
@@ -15,6 +20,7 @@ type User {
   country: String
   about: String
   content: String
+  skills: [Skill!]!
 }
 
 type Query {

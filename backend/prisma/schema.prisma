@@ -30,19 +30,29 @@ model User {
 }
 
 model Job {
-  id           Int      @id @default(autoincrement())
+  id           Int        @id @default(autoincrement())
   title        String
   start        DateTime
-  finish       DateTime
-  created      DateTime @default(now())
-  updated      DateTime @default(now())
-  description  String
+  finish       DateTime?
+  created      DateTime   @default(now())
+  updated      DateTime   @default(now())
+  description  String?
+  details      String?    @db.Text
   userId       Int
-  user         User     @relation(fields: [userId], references: [id])
+  user         User       @relation(fields: [userId], references: [id])
+  position     String?
 }
 
 model Skill {
-  id           Int    @id @default(autoincrement())
-  title        String @unique
+  id           Int        @id @default(autoincrement())
+  title        String     @unique
   users        User[]
+  skillGroup   SkillGroup @relation(fields: [skillGroupId], references: [id])
+  skillGroupId Int
+}
+
+model SkillGroup {
+  id           Int        @id @default(autoincrement())
+  title        String     @unique
+  skills       Skill[]
 }

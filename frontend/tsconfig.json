@@ -14,5 +14,8 @@
     {
       "path": "./.nuxt/tsconfig.node.json"
     }
-  ]
+  ],
+  "vueCompilerOptions": {
+    "plugins": ["@vue/language-plugin-pug"]
+  }
 }
