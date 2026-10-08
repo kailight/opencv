@@ -2,8 +2,8 @@ import { Resolver, Query, Mutation, Args, Int } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
 import { PRISMA_TOKEN } from '@/prisma/prisma.module.js';
 import { PrismaService} from "../prisma/prisma.service.js";
-import { Skill } from '@/skills/models/skill.model.js';
-import { SkillGroup } from '@/skillGroups/models/skillGroup.model.js';
+import { Skill } from '@/skills/skill.model.js';
+import { SkillGroup } from '@/skillGroups/skillGroup.model.js';
 import type { PrismaClient } from '../../src/generated/client/index.js';
 
 @Resolver(() => SkillGroup)

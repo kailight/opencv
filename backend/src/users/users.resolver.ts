@@ -1,9 +1,10 @@
 import { Resolver, Query, Mutation, ResolveField, Parent, Args, Int } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
 import { PRISMA_TOKEN } from '@/prisma/prisma.module.js';
-import { User } from '@/users/models/user.model.js';
-import { Skill } from '@/skills/models/skill.model.js';
-import { SkillGroup } from '@/skillGroups/models/skillGroup.model.js';
+import { User } from '@/users/user.model.js';
+import { Skill } from '@/skills/skill.model.js';
+import { Job } from '@/jobs/job.model.js';
+import { SkillGroup } from '@/skillGroups/skillGroup.model.js';
 import type { PrismaClient } from '../../src/generated/client/index.js';
 
 @Resolver(() => User)
@@ -40,6 +41,25 @@ export class UsersResolver {
     const mappedSkills = userSkills.map((pivotRecord) => pivotRecord.skill);
 
     return mappedSkills.filter((skill) => skill !== null && skill !== undefined);
+  }
+
+  @ResolveField(() => [Job], { name: 'jobs' })
+  async getJobs(@Parent() user: User) {
+    if (!user || !user.id) return [];
+
+    // Using Prisma's relation fluent API to fetch the connected skills
+    const userJobs = await this.prisma.job.findMany({
+      where: { userId: user.id },
+      // include: {
+      //   job: true, // Tells Prisma to eager-load the core Job object records
+      // },
+    });
+
+    return userJobs
+
+    // const mappedJobs = userJobs.map((pivotRecord) => pivotRecord.job);
+
+    // return mappedJobs.filter((job) => job !== null && job !== undefined);
   }
 
   @ResolveField(() => [SkillGroup], { name: 'skillGroups' })

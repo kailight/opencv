@@ -8,6 +8,10 @@ query {
       id
       title
     }
+    jobs {
+      title
+      position
+    }
   }
 }
 `)

@@ -1,6 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
-import { Skill } from '@/skills/models/skill.model.js'
-import { SkillGroup } from '@/skillGroups/models/skillGroup.model.js'
+import { Skill } from '@/skills/skill.model.js'
+import { Job } from '@/jobs/job.model.js'
+import { SkillGroup } from '@/skillGroups/skillGroup.model.js'
 
 @ObjectType()
 export class User {
@@ -40,8 +41,11 @@ export class User {
   @Field({ nullable: true })
   content?: string;
 
-  @Field(() => [Skill])
+  @Field(() => [Skill], { nullable: 'items' })
   skills: Skill[];
+
+  @Field(() => [Job], { nullable: 'items' })
+  jobs: Job[];
 
   @Field(() => [SkillGroup], { nullable: 'items' })
   skillGroups: SkillGroup[];

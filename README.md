@@ -35,3 +35,4 @@
 3. added nuxt, hardcoded cv a bit, querying graphql from it, moving the data to the database atm
 4. created skills resolver with many-to-many connection (we are here)
 5. Ran into issues with nested queries (users with skillGroups), solved
+6. Added jobs (belongsTo user)

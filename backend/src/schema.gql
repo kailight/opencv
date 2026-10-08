@@ -14,6 +14,16 @@ type Skill {
   skillGroup: SkillGroup!
 }
 
+type Job {
+  id: Int!
+  title: String!
+  start: String!
+  finish: String!
+  position: String!
+  description: String!
+  details: String!
+}
+
 type User {
   id: Int!
   firstName: String
@@ -27,7 +37,8 @@ type User {
   country: String
   about: String
   content: String
-  skills: [Skill!]!
+  skills: [Skill]!
+  jobs: [Job]!
   skillGroups: [SkillGroup]!
 }
 
