@@ -25,6 +25,8 @@
 
 # Useful commands
 `robocopy "c:\dev\kailight\frontend\.output\public" "c:\dev\kailight\backend\client" /E`
+`npx prisma db pull` // update schema from DB
+`npx prisma generate` // regenerate the client
 
 # Workflow
 
@@ -32,3 +34,4 @@
 2. added prisma, created schema
 3. added nuxt, hardcoded cv a bit, querying graphql from it, moving the data to the database atm
 4. created skills resolver with many-to-many connection (we are here)
+5. Ran into issues with nested queries (users with skillGroups), solved

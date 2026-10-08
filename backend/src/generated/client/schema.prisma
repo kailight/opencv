@@ -1,32 +1,10 @@
-// This is your Prisma schema file,
-// learn more about it in the docs: https://pris.ly/d/prisma-schema
-
-// Get a free hosted Postgres database in seconds: `npx create-db`
-datasource db {
-  provider = "mysql"
-}
-
 generator client {
   provider = "prisma-client-js"
   output   = "../src/generated/client"
 }
 
-model User {
-  id        Int      @id @default(autoincrement())
-  firstName String
-  lastName  String
-  nickName  String
-  email     String?  @unique
-  phone     String?  @unique
-  password  String
-  telegram  String?
-  city      String?
-  country   String?
-  about     String?
-  created   DateTime @default(now())
-  updated   DateTime @default(now())
-  skills    Skill[]
-  jobs      Job[]
+datasource db {
+  provider = "mysql"
 }
 
 model Job {
@@ -36,13 +14,56 @@ model Job {
   finish      DateTime
   created     DateTime @default(now())
   updated     DateTime @default(now())
-  description String
+  description String?  @db.TinyText
   userId      Int
-  user        User     @relation(fields: [userId], references: [id])
+  position    String?
+  details     String?  @db.TinyText
+  user        User     @relation(fields: [userId], references: [id], map: "Job_userId_fkey")
+
+  @@index([userId], map: "Job_userId_fkey")
+}
+
+model SkillGroup {
+  id    Int    @id @default(autoincrement())
+  title String @unique(map: "SkillGroup_title_key")
+
+  skill Skill[]
 }
 
 model Skill {
-  id    Int    @id @default(autoincrement())
-  title String @unique
-  users User[]
+  id           Int         @id @default(autoincrement())
+  title        String      @unique(map: "Skill_title_key")
+  users        UserSkill[]
+  skillGroupId Int         @default(1) @map("skillgroup_id")
+  skillGroup   SkillGroup  @relation(fields: [skillGroupId], references: [id])
+}
+
+model User {
+  id        Int         @id @default(autoincrement())
+  firstName String
+  lastName  String
+  nickName  String
+  email     String?     @unique(map: "User_email_key")
+  phone     String?     @unique(map: "User_phone_key")
+  password  String
+  telegram  String?
+  city      String?
+  country   String?
+  about     String?
+  created   DateTime    @default(now())
+  updated   DateTime    @default(now())
+  job       Job[]
+  skills    UserSkill[]
+}
+
+model UserSkill {
+  userId  Int @map("user_id")
+  skillId Int @map("skill_id")
+
+  user  User  @relation(fields: [userId], references: [id], onDelete: Restrict)
+  skill Skill @relation(fields: [skillId], references: [id], onDelete: Restrict)
+
+  @@id([userId, skillId])
+  // 4. Forces Prisma to name the actual database table "users_skills"
+  @@map("users_skills")
 }

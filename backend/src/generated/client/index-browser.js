@@ -120,6 +120,30 @@ exports.Prisma.TransactionIsolationLevel = makeStrictEnum({
   Serializable: 'Serializable'
 });
 
+exports.Prisma.JobScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  start: 'start',
+  finish: 'finish',
+  created: 'created',
+  updated: 'updated',
+  description: 'description',
+  userId: 'userId',
+  position: 'position',
+  details: 'details'
+};
+
+exports.Prisma.SkillGroupScalarFieldEnum = {
+  id: 'id',
+  title: 'title'
+};
+
+exports.Prisma.SkillScalarFieldEnum = {
+  id: 'id',
+  title: 'title',
+  skillGroupId: 'skillGroupId'
+};
+
 exports.Prisma.UserScalarFieldEnum = {
   id: 'id',
   firstName: 'firstName',
@@ -136,20 +160,9 @@ exports.Prisma.UserScalarFieldEnum = {
   updated: 'updated'
 };
 
-exports.Prisma.JobScalarFieldEnum = {
-  id: 'id',
-  title: 'title',
-  start: 'start',
-  finish: 'finish',
-  created: 'created',
-  updated: 'updated',
-  description: 'description',
-  userId: 'userId'
-};
-
-exports.Prisma.SkillScalarFieldEnum = {
-  id: 'id',
-  title: 'title'
+exports.Prisma.UserSkillScalarFieldEnum = {
+  userId: 'userId',
+  skillId: 'skillId'
 };
 
 exports.Prisma.SortOrder = {
@@ -160,6 +173,21 @@ exports.Prisma.SortOrder = {
 exports.Prisma.NullsOrder = {
   first: 'first',
   last: 'last'
+};
+
+exports.Prisma.JobOrderByRelevanceFieldEnum = {
+  title: 'title',
+  description: 'description',
+  position: 'position',
+  details: 'details'
+};
+
+exports.Prisma.SkillGroupOrderByRelevanceFieldEnum = {
+  title: 'title'
+};
+
+exports.Prisma.SkillOrderByRelevanceFieldEnum = {
+  title: 'title'
 };
 
 exports.Prisma.UserOrderByRelevanceFieldEnum = {
@@ -175,20 +203,13 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   about: 'about'
 };
 
-exports.Prisma.JobOrderByRelevanceFieldEnum = {
-  title: 'title',
-  description: 'description'
-};
-
-exports.Prisma.SkillOrderByRelevanceFieldEnum = {
-  title: 'title'
-};
-
 
 exports.Prisma.ModelName = {
-  User: 'User',
   Job: 'Job',
-  Skill: 'Skill'
+  SkillGroup: 'SkillGroup',
+  Skill: 'Skill',
+  User: 'User',
+  UserSkill: 'UserSkill'
 };
 
 /**

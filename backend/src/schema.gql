@@ -2,9 +2,16 @@
 # THIS FILE WAS AUTOMATICALLY GENERATED (DO NOT MODIFY)
 # ------------------------------------------------------
 
+type SkillGroup {
+  id: Int!
+  title: String!
+  skills: [Skill]!
+}
+
 type Skill {
   id: Int!
   title: String!
+  skillGroup: SkillGroup!
 }
 
 type User {
@@ -21,13 +28,17 @@ type User {
   about: String
   content: String
   skills: [Skill!]!
+  skillGroups: [SkillGroup]!
 }
 
 type Query {
   users: [User!]!
   user(id: Int!): User
+  skills: [Skill!]!
+  skill(id: Int!): Skill
 }
 
 type Mutation {
   createUser(firstName: String!, lastName: String!, nickName: String!, email: String!, password: String!, phone: String!, telegram: String!, city: String!, country: String!, about: String!): User!
+  createSkill(title: String!): Skill!
 }

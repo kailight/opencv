@@ -1,4 +1,5 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { SkillGroup } from '@/skillGroups/models/skillGroup.model.js'
 
 @ObjectType()
 export class Skill {
@@ -7,4 +8,7 @@ export class Skill {
 
   @Field()
   title: string;
+
+  @Field(() => SkillGroup)
+  skillGroup: SkillGroup;
 }
