@@ -1,58 +1,74 @@
-dockerfile
-# ========================================================
-# STAGE 1: Build the Vue Frontend outside the backend
-# ========================================================
-FROM node:20-alpine AS frontend-builder
+# ==========================================
+# STAGE 1: Build the Nuxt 4 Static Frontend
+# ==========================================
+FROM node:22-alpine AS frontend-builder
 WORKDIR /app/frontend
 
 COPY frontend/package*.json ./
 RUN npm ci
 
 COPY frontend/ .
-# 2) Changed npm run build to npm run generate
 RUN npm run generate
 
-# ========================================================
+# ==========================================
 # STAGE 2: Build the NestJS Backend
-# ========================================================
-FROM node:20-alpine AS backend-builder
+# ==========================================
+FROM node:22-alpine AS backend-builder
 WORKDIR /app/backend
 
-RUN apk add --no-cache openssl curl
-
 COPY backend/package*.json ./
-COPY backend/prisma ./prisma/
 RUN npm ci
 
 COPY backend/ .
 RUN npx prisma generate
 RUN npm run build
-RUN npm prune --production
 
-# ========================================================
-# STAGE 3: Final Single Container Runner
-# ========================================================
-FROM node:20-alpine AS runner
+# ==========================================
+# STAGE 3: Final Production Runtime Stack
+# ==========================================
+FROM node:22-alpine
 WORKDIR /app
 
-RUN apk add --no-cache openssl
+# Install MySQL server locally
+RUN apk add --no-cache mysql mysql-client
 
-# Copy the backend runtime environment
-COPY --from=backend-builder /app/backend/node_modules ./node_modules
-COPY --from=backend-builder /app/backend/dist ./dist
-COPY --from=backend-builder /app/backend/package*.json ./
-COPY --from=backend-builder /app/backend/prisma ./prisma
+# Setup MySQL system directories
+RUN mkdir -p /run/mysqld /var/lib/mysql && \
+    chown -R mysql:mysql /run/mysqld /var/lib/mysql && \
+    mysql_install_db --user=mysql --datadir=/var/lib/mysql
 
-# 1) Copy static frontend files from frontend/.output/public instead
-COPY --from=frontend-builder /app/frontend/.output/public ./client
+# Copy production backend files
+COPY backend/package*.json ./backend/
+RUN cd backend && npm ci --only=production
 
-# Expose port 80 for everything
-ENV PORT=80
-EXPOSE 80
+COPY --from=backend-builder /app/backend/dist ./backend/dist
+COPY --from=backend-builder /app/backend/node_modules/.prisma ./backend/node_modules/.prisma
+COPY --from=backend-builder /app/backend/node_modules/@prisma/client ./backend/node_modules/@prisma/client
+COPY --from=backend-builder /app/backend/prisma ./backend/prisma
+COPY --from=frontend-builder /app/frontend/.output/public /app/backend/client
 
-# Run CockroachDB migrations and fire up the single server process
-CMD ["sh", "-c", "npx prisma db push && node dist/main.js"]
+# Setup environment variables
+ENV NODE_ENV=production
+ENV PORT=4000
+# THIS ENABLES THE SEED ONLY INSIDE THIS CONTAINER IMAGE
+ENV RUN_SEED=true
 
-# Commands to build and run
-# docker build -t opencv .
-# docker run -d -p 80:80 e DATABASE_URL="postgresql://root@host.docker.internal:26257/defaultdb?sslmode=disable" --name opencv opencv
+# The container itself resolves "localhost", so it uses 3306 internally
+ENV DATABASE_URL="mysql://root:@localhost:3306/opencv"
+
+# Expose the internal container ports
+EXPOSE 3306 4000
+
+# Bootstraps MySQL database structures, applies prisma migrations, and boots NestJS
+CMD sh -c "\
+  mysqld --user=mysql --skip-networking & \
+  sleep 2 && \
+  mysql -e 'CREATE DATABASE IF NOT EXISTS opencv;' && \
+  pkill mysqld && \
+  sleep 1 && \
+  mysqld --user=mysql --console & \
+  sleep 2 && \
+  cd backend && \
+  npx prisma migrate deploy && \
+  node dist/src/main\
+"

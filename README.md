@@ -27,6 +27,8 @@
 `robocopy "c:\dev\kailight\frontend\.output\public" "c:\dev\kailight\backend\client" /E`
 `npx prisma db pull` // update schema from DB
 `npx prisma generate` // regenerate the client
+`docker build -t opencv .`
+`docker run -p 3307:3306 -p 4000:80 static-fullstack-app`
 
 # Workflow
 
@@ -36,3 +38,5 @@
 4. created skills resolver with many-to-many connection (we are here)
 5. Ran into issues with nested queries (users with skillGroups), solved
 6. Added jobs (belongsTo user)
+7. Ok CV displays, starting with docker
+

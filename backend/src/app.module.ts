@@ -5,6 +5,7 @@ import { join } from 'path';
 import { AppController } from './app.controller.js';
 import { AppService } from './app.service.js';
 import { UsersModule } from './users/users.module.js';
+import { SkillGroupsModule } from './skillGroups/skillGroups.module.js';
 import { PrismaModule } from './prisma/prisma.module.js';
 import { ServeStaticModule } from '@nestjs/serve-static';
 
@@ -21,6 +22,7 @@ import { ServeStaticModule } from '@nestjs/serve-static';
     }),
     UsersModule,
     PrismaModule,
+    SkillGroupsModule
   ],
   controllers: [AppController],
   providers: [AppService],

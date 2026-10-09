@@ -4,6 +4,7 @@ import { PRISMA_TOKEN } from '@/prisma/prisma.module.js';
 import { PrismaService} from "../prisma/prisma.service.js";
 import { Skill } from '@/skills/skill.model.js';
 import { SkillGroup } from '@/skillGroups/skillGroup.model.js';
+import { CreateSkillGroupInput } from '@/skillGroups/create.skillGroup.dto.js'
 import type { PrismaClient } from '../../src/generated/client/index.js';
 
 @Resolver(() => SkillGroup)
@@ -25,12 +26,14 @@ export class SkillGroupsResolver {
     });
   }
 
-  @Mutation(() => SkillGroup)
+  @Mutation(() => SkillGroup, { name: 'createSkillGroup' })
   async createSkillGroup(
-      @Args('title') title: string,
+      @Args('input') input: CreateSkillGroupInput,
   ) {
     return this.prisma.skillGroup.create({
-      data: { title },
+      data: {
+        title: input.title,
+      },
     });
   }
 

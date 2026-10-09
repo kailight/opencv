@@ -14,12 +14,21 @@ export class Job {
   @Field()
   finish: string;
 
+  @Field({nullable: true})
+  city: string;
+
+  @Field({nullable: true})
+  country: string;
+
+  @Field({nullable: true})
+  contract: string;
+
   @Field()
   position: string;
 
   @Field()
   description: string;
 
-  @Field()
+  @Field({nullable: true})
   details: string;
 }

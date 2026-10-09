@@ -36,10 +36,7 @@ export class User {
   country: string;
 
   @Field({ nullable: true })
-  about: string;
-
-  @Field({ nullable: true })
-  content?: string;
+  summary?: string;
 
   @Field(() => [Skill], { nullable: 'items' })
   skills: Skill[];

@@ -128,6 +128,9 @@ exports.Prisma.JobScalarFieldEnum = {
   created: 'created',
   updated: 'updated',
   description: 'description',
+  contract: 'contract',
+  city: 'city',
+  country: 'country',
   userId: 'userId',
   position: 'position',
   details: 'details'
@@ -155,7 +158,7 @@ exports.Prisma.UserScalarFieldEnum = {
   telegram: 'telegram',
   city: 'city',
   country: 'country',
-  about: 'about',
+  summary: 'summary',
   created: 'created',
   updated: 'updated'
 };
@@ -178,6 +181,9 @@ exports.Prisma.NullsOrder = {
 exports.Prisma.JobOrderByRelevanceFieldEnum = {
   title: 'title',
   description: 'description',
+  contract: 'contract',
+  city: 'city',
+  country: 'country',
   position: 'position',
   details: 'details'
 };
@@ -200,7 +206,7 @@ exports.Prisma.UserOrderByRelevanceFieldEnum = {
   telegram: 'telegram',
   city: 'city',
   country: 'country',
-  about: 'about'
+  summary: 'summary'
 };
 
 

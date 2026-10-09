@@ -83,7 +83,8 @@ export default function useApi() {
 
     if (result.errors) {
       console.error('GraphQL Errors:', result.errors);
-      throw new Error('Failed to fetch GraphQL data');
+      error(result.errors[0]?.message || 'Failed to fetch GraphQL data');
+      // throw new Error('Failed to fetch GraphQL data');
     }
 
     console.info('result.data', result.data);

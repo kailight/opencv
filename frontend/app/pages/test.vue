@@ -33,6 +33,15 @@ query {
 }
 `)
 
+const mutationQuery = ref(`
+mutation {
+  createSkillGroup(input: { title: "Soft Skills / Management" }) {
+    id
+    title
+  }
+}
+`)
+
 const req = async () => {
   const data = await graphql(usersQuery.value)
   res.value = JSON.stringify(data, null, 2)

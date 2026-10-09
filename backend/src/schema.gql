@@ -19,9 +19,13 @@ type Job {
   title: String!
   start: String!
   finish: String!
+  city: String
+  country: String
+  contract: String
   position: String!
   description: String!
-  details: String!
+  details: String
+  user: User!
 }
 
 type User {
@@ -35,8 +39,7 @@ type User {
   telegram: String
   city: String
   country: String
-  about: String
-  content: String
+  summary: String
   skills: [Skill]!
   jobs: [Job]!
   skillGroups: [SkillGroup]!
@@ -47,9 +50,18 @@ type Query {
   user(id: Int!): User
   skills: [Skill!]!
   skill(id: Int!): Skill
+  jobs: [Job!]!
+  job(id: Int!): Job
+  skillGroups: [SkillGroup!]!
 }
 
 type Mutation {
   createUser(firstName: String!, lastName: String!, nickName: String!, email: String!, password: String!, phone: String!, telegram: String!, city: String!, country: String!, about: String!): User!
   createSkill(title: String!): Skill!
+  createJob(title: String!, start: String!, finish: String!, position: String!, description: String!): Job!
+  createSkillGroup(input: CreateSkillGroupInput!): SkillGroup!
+}
+
+input CreateSkillGroupInput {
+  title: String!
 }

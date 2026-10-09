@@ -15,6 +15,9 @@ model Job {
   created     DateTime @default(now())
   updated     DateTime @default(now())
   description String?  @db.TinyText
+  contract    String?
+  city        String?
+  country     String?
   userId      Int
   position    String?
   details     String?  @db.TinyText
@@ -49,7 +52,7 @@ model User {
   telegram  String?
   city      String?
   country   String?
-  about     String?
+  summary   String?     @db.Text
   created   DateTime    @default(now())
   updated   DateTime    @default(now())
   job       Job[]

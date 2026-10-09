@@ -2,16 +2,22 @@ import { storeToRefs } from 'pinia'
 
 export default function useUser () {
 
-  const languageCookie = useCookie('language')
+  // const languageCookie = useCookie('language')
   const router = useRouter()
   const userStore = UserStore()
-  const { IMAGES_BASE_URI } = useEnv()
-
+  // const { IMAGES_BASE_URI } = useEnv()
   const { user } = storeToRefs(userStore)
-  const { get, post } = useApi()
+  const { get, post, graphql } = useApi()
   const { languages } = useLanguages()
 
   const { warning, error, success } = useToaster()
+
+  // singleton
+  const viewerSettings = useState('viewer-settings', () => ({
+    showSummary: true,
+    showSkills: true,
+    showExperience: true
+  }))
 
   const signIn = async ({ email, password } : { email: string, password: string }) => {
     console.info('user.signIn()', email, password )
@@ -115,12 +121,13 @@ export default function useUser () {
 
   const language = computed( {
     get() {
-      const language_id = languageCookie.value || user?.value?.language || 'en'
+      // const language_id = languageCookie.value || user?.value?.language || 'en'
+      const language_id = user?.value?.language || 'en'
       const language = languages?.value?.find( (l:Language) => l.id === language_id )
       return language
     },
     set(language) {
-      languageCookie.value = language
+      // languageCookie.value = language
       userStore.update( { language } )
     }
   })
@@ -163,7 +170,8 @@ export default function useUser () {
     language,
     phone,
     address,
-    role
+    role,
+    viewerSettings,
   }
 
 }

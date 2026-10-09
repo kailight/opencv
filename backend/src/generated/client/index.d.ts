@@ -1349,6 +1349,9 @@ export namespace Prisma {
     created: Date | null
     updated: Date | null
     description: string | null
+    contract: string | null
+    city: string | null
+    country: string | null
     userId: number | null
     position: string | null
     details: string | null
@@ -1362,6 +1365,9 @@ export namespace Prisma {
     created: Date | null
     updated: Date | null
     description: string | null
+    contract: string | null
+    city: string | null
+    country: string | null
     userId: number | null
     position: string | null
     details: string | null
@@ -1375,6 +1381,9 @@ export namespace Prisma {
     created: number
     updated: number
     description: number
+    contract: number
+    city: number
+    country: number
     userId: number
     position: number
     details: number
@@ -1400,6 +1409,9 @@ export namespace Prisma {
     created?: true
     updated?: true
     description?: true
+    contract?: true
+    city?: true
+    country?: true
     userId?: true
     position?: true
     details?: true
@@ -1413,6 +1425,9 @@ export namespace Prisma {
     created?: true
     updated?: true
     description?: true
+    contract?: true
+    city?: true
+    country?: true
     userId?: true
     position?: true
     details?: true
@@ -1426,6 +1441,9 @@ export namespace Prisma {
     created?: true
     updated?: true
     description?: true
+    contract?: true
+    city?: true
+    country?: true
     userId?: true
     position?: true
     details?: true
@@ -1526,6 +1544,9 @@ export namespace Prisma {
     created: Date
     updated: Date
     description: string | null
+    contract: string | null
+    city: string | null
+    country: string | null
     userId: number
     position: string | null
     details: string | null
@@ -1558,6 +1579,9 @@ export namespace Prisma {
     created?: boolean
     updated?: boolean
     description?: boolean
+    contract?: boolean
+    city?: boolean
+    country?: boolean
     userId?: boolean
     position?: boolean
     details?: boolean
@@ -1574,12 +1598,15 @@ export namespace Prisma {
     created?: boolean
     updated?: boolean
     description?: boolean
+    contract?: boolean
+    city?: boolean
+    country?: boolean
     userId?: boolean
     position?: boolean
     details?: boolean
   }
 
-  export type JobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "start" | "finish" | "created" | "updated" | "description" | "userId" | "position" | "details", ExtArgs["result"]["job"]>
+  export type JobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "start" | "finish" | "created" | "updated" | "description" | "contract" | "city" | "country" | "userId" | "position" | "details", ExtArgs["result"]["job"]>
   export type JobInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -1597,6 +1624,9 @@ export namespace Prisma {
       created: Date
       updated: Date
       description: string | null
+      contract: string | null
+      city: string | null
+      country: string | null
       userId: number
       position: string | null
       details: string | null
@@ -1977,6 +2007,9 @@ export namespace Prisma {
     readonly created: FieldRef<"Job", 'DateTime'>
     readonly updated: FieldRef<"Job", 'DateTime'>
     readonly description: FieldRef<"Job", 'String'>
+    readonly contract: FieldRef<"Job", 'String'>
+    readonly city: FieldRef<"Job", 'String'>
+    readonly country: FieldRef<"Job", 'String'>
     readonly userId: FieldRef<"Job", 'Int'>
     readonly position: FieldRef<"Job", 'String'>
     readonly details: FieldRef<"Job", 'String'>
@@ -4318,7 +4351,7 @@ export namespace Prisma {
     telegram: string | null
     city: string | null
     country: string | null
-    about: string | null
+    summary: string | null
     created: Date | null
     updated: Date | null
   }
@@ -4334,7 +4367,7 @@ export namespace Prisma {
     telegram: string | null
     city: string | null
     country: string | null
-    about: string | null
+    summary: string | null
     created: Date | null
     updated: Date | null
   }
@@ -4350,7 +4383,7 @@ export namespace Prisma {
     telegram: number
     city: number
     country: number
-    about: number
+    summary: number
     created: number
     updated: number
     _all: number
@@ -4376,7 +4409,7 @@ export namespace Prisma {
     telegram?: true
     city?: true
     country?: true
-    about?: true
+    summary?: true
     created?: true
     updated?: true
   }
@@ -4392,7 +4425,7 @@ export namespace Prisma {
     telegram?: true
     city?: true
     country?: true
-    about?: true
+    summary?: true
     created?: true
     updated?: true
   }
@@ -4408,7 +4441,7 @@ export namespace Prisma {
     telegram?: true
     city?: true
     country?: true
-    about?: true
+    summary?: true
     created?: true
     updated?: true
     _all?: true
@@ -4511,7 +4544,7 @@ export namespace Prisma {
     telegram: string | null
     city: string | null
     country: string | null
-    about: string | null
+    summary: string | null
     created: Date
     updated: Date
     _count: UserCountAggregateOutputType | null
@@ -4546,7 +4579,7 @@ export namespace Prisma {
     telegram?: boolean
     city?: boolean
     country?: boolean
-    about?: boolean
+    summary?: boolean
     created?: boolean
     updated?: boolean
     job?: boolean | User$jobArgs<ExtArgs>
@@ -4567,12 +4600,12 @@ export namespace Prisma {
     telegram?: boolean
     city?: boolean
     country?: boolean
-    about?: boolean
+    summary?: boolean
     created?: boolean
     updated?: boolean
   }
 
-  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "nickName" | "email" | "phone" | "password" | "telegram" | "city" | "country" | "about" | "created" | "updated", ExtArgs["result"]["user"]>
+  export type UserOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "firstName" | "lastName" | "nickName" | "email" | "phone" | "password" | "telegram" | "city" | "country" | "summary" | "created" | "updated", ExtArgs["result"]["user"]>
   export type UserInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     job?: boolean | User$jobArgs<ExtArgs>
     skills?: boolean | User$skillsArgs<ExtArgs>
@@ -4596,7 +4629,7 @@ export namespace Prisma {
       telegram: string | null
       city: string | null
       country: string | null
-      about: string | null
+      summary: string | null
       created: Date
       updated: Date
     }, ExtArgs["result"]["user"]>
@@ -4980,7 +5013,7 @@ export namespace Prisma {
     readonly telegram: FieldRef<"User", 'String'>
     readonly city: FieldRef<"User", 'String'>
     readonly country: FieldRef<"User", 'String'>
-    readonly about: FieldRef<"User", 'String'>
+    readonly summary: FieldRef<"User", 'String'>
     readonly created: FieldRef<"User", 'DateTime'>
     readonly updated: FieldRef<"User", 'DateTime'>
   }
@@ -6362,6 +6395,9 @@ export namespace Prisma {
     created: 'created',
     updated: 'updated',
     description: 'description',
+    contract: 'contract',
+    city: 'city',
+    country: 'country',
     userId: 'userId',
     position: 'position',
     details: 'details'
@@ -6398,7 +6434,7 @@ export namespace Prisma {
     telegram: 'telegram',
     city: 'city',
     country: 'country',
-    about: 'about',
+    summary: 'summary',
     created: 'created',
     updated: 'updated'
   };
@@ -6433,6 +6469,9 @@ export namespace Prisma {
   export const JobOrderByRelevanceFieldEnum: {
     title: 'title',
     description: 'description',
+    contract: 'contract',
+    city: 'city',
+    country: 'country',
     position: 'position',
     details: 'details'
   };
@@ -6464,7 +6503,7 @@ export namespace Prisma {
     telegram: 'telegram',
     city: 'city',
     country: 'country',
-    about: 'about'
+    summary: 'summary'
   };
 
   export type UserOrderByRelevanceFieldEnum = (typeof UserOrderByRelevanceFieldEnum)[keyof typeof UserOrderByRelevanceFieldEnum]
@@ -6517,6 +6556,9 @@ export namespace Prisma {
     created?: DateTimeFilter<"Job"> | Date | string
     updated?: DateTimeFilter<"Job"> | Date | string
     description?: StringNullableFilter<"Job"> | string | null
+    contract?: StringNullableFilter<"Job"> | string | null
+    city?: StringNullableFilter<"Job"> | string | null
+    country?: StringNullableFilter<"Job"> | string | null
     userId?: IntFilter<"Job"> | number
     position?: StringNullableFilter<"Job"> | string | null
     details?: StringNullableFilter<"Job"> | string | null
@@ -6531,6 +6573,9 @@ export namespace Prisma {
     created?: SortOrder
     updated?: SortOrder
     description?: SortOrderInput | SortOrder
+    contract?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
     userId?: SortOrder
     position?: SortOrderInput | SortOrder
     details?: SortOrderInput | SortOrder
@@ -6549,6 +6594,9 @@ export namespace Prisma {
     created?: DateTimeFilter<"Job"> | Date | string
     updated?: DateTimeFilter<"Job"> | Date | string
     description?: StringNullableFilter<"Job"> | string | null
+    contract?: StringNullableFilter<"Job"> | string | null
+    city?: StringNullableFilter<"Job"> | string | null
+    country?: StringNullableFilter<"Job"> | string | null
     userId?: IntFilter<"Job"> | number
     position?: StringNullableFilter<"Job"> | string | null
     details?: StringNullableFilter<"Job"> | string | null
@@ -6563,6 +6611,9 @@ export namespace Prisma {
     created?: SortOrder
     updated?: SortOrder
     description?: SortOrderInput | SortOrder
+    contract?: SortOrderInput | SortOrder
+    city?: SortOrderInput | SortOrder
+    country?: SortOrderInput | SortOrder
     userId?: SortOrder
     position?: SortOrderInput | SortOrder
     details?: SortOrderInput | SortOrder
@@ -6584,6 +6635,9 @@ export namespace Prisma {
     created?: DateTimeWithAggregatesFilter<"Job"> | Date | string
     updated?: DateTimeWithAggregatesFilter<"Job"> | Date | string
     description?: StringNullableWithAggregatesFilter<"Job"> | string | null
+    contract?: StringNullableWithAggregatesFilter<"Job"> | string | null
+    city?: StringNullableWithAggregatesFilter<"Job"> | string | null
+    country?: StringNullableWithAggregatesFilter<"Job"> | string | null
     userId?: IntWithAggregatesFilter<"Job"> | number
     position?: StringNullableWithAggregatesFilter<"Job"> | string | null
     details?: StringNullableWithAggregatesFilter<"Job"> | string | null
@@ -6697,7 +6751,7 @@ export namespace Prisma {
     telegram?: StringNullableFilter<"User"> | string | null
     city?: StringNullableFilter<"User"> | string | null
     country?: StringNullableFilter<"User"> | string | null
-    about?: StringNullableFilter<"User"> | string | null
+    summary?: StringNullableFilter<"User"> | string | null
     created?: DateTimeFilter<"User"> | Date | string
     updated?: DateTimeFilter<"User"> | Date | string
     job?: JobListRelationFilter
@@ -6715,7 +6769,7 @@ export namespace Prisma {
     telegram?: SortOrderInput | SortOrder
     city?: SortOrderInput | SortOrder
     country?: SortOrderInput | SortOrder
-    about?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
     created?: SortOrder
     updated?: SortOrder
     job?: JobOrderByRelationAggregateInput
@@ -6737,7 +6791,7 @@ export namespace Prisma {
     telegram?: StringNullableFilter<"User"> | string | null
     city?: StringNullableFilter<"User"> | string | null
     country?: StringNullableFilter<"User"> | string | null
-    about?: StringNullableFilter<"User"> | string | null
+    summary?: StringNullableFilter<"User"> | string | null
     created?: DateTimeFilter<"User"> | Date | string
     updated?: DateTimeFilter<"User"> | Date | string
     job?: JobListRelationFilter
@@ -6755,7 +6809,7 @@ export namespace Prisma {
     telegram?: SortOrderInput | SortOrder
     city?: SortOrderInput | SortOrder
     country?: SortOrderInput | SortOrder
-    about?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
     created?: SortOrder
     updated?: SortOrder
     _count?: UserCountOrderByAggregateInput
@@ -6779,7 +6833,7 @@ export namespace Prisma {
     telegram?: StringNullableWithAggregatesFilter<"User"> | string | null
     city?: StringNullableWithAggregatesFilter<"User"> | string | null
     country?: StringNullableWithAggregatesFilter<"User"> | string | null
-    about?: StringNullableWithAggregatesFilter<"User"> | string | null
+    summary?: StringNullableWithAggregatesFilter<"User"> | string | null
     created?: DateTimeWithAggregatesFilter<"User"> | Date | string
     updated?: DateTimeWithAggregatesFilter<"User"> | Date | string
   }
@@ -6837,6 +6891,9 @@ export namespace Prisma {
     created?: Date | string
     updated?: Date | string
     description?: string | null
+    contract?: string | null
+    city?: string | null
+    country?: string | null
     position?: string | null
     details?: string | null
     user: UserCreateNestedOneWithoutJobInput
@@ -6850,6 +6907,9 @@ export namespace Prisma {
     created?: Date | string
     updated?: Date | string
     description?: string | null
+    contract?: string | null
+    city?: string | null
+    country?: string | null
     userId: number
     position?: string | null
     details?: string | null
@@ -6862,6 +6922,9 @@ export namespace Prisma {
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    contract?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutJobNestedInput
@@ -6875,6 +6938,9 @@ export namespace Prisma {
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    contract?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: IntFieldUpdateOperationsInput | number
     position?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
@@ -6888,6 +6954,9 @@ export namespace Prisma {
     created?: Date | string
     updated?: Date | string
     description?: string | null
+    contract?: string | null
+    city?: string | null
+    country?: string | null
     userId: number
     position?: string | null
     details?: string | null
@@ -6900,6 +6969,9 @@ export namespace Prisma {
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    contract?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -6912,6 +6984,9 @@ export namespace Prisma {
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    contract?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: IntFieldUpdateOperationsInput | number
     position?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
@@ -7005,7 +7080,7 @@ export namespace Prisma {
     telegram?: string | null
     city?: string | null
     country?: string | null
-    about?: string | null
+    summary?: string | null
     created?: Date | string
     updated?: Date | string
     job?: JobCreateNestedManyWithoutUserInput
@@ -7023,7 +7098,7 @@ export namespace Prisma {
     telegram?: string | null
     city?: string | null
     country?: string | null
-    about?: string | null
+    summary?: string | null
     created?: Date | string
     updated?: Date | string
     job?: JobUncheckedCreateNestedManyWithoutUserInput
@@ -7040,7 +7115,7 @@ export namespace Prisma {
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
-    about?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     job?: JobUpdateManyWithoutUserNestedInput
@@ -7058,7 +7133,7 @@ export namespace Prisma {
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
-    about?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     job?: JobUncheckedUpdateManyWithoutUserNestedInput
@@ -7076,7 +7151,7 @@ export namespace Prisma {
     telegram?: string | null
     city?: string | null
     country?: string | null
-    about?: string | null
+    summary?: string | null
     created?: Date | string
     updated?: Date | string
   }
@@ -7091,7 +7166,7 @@ export namespace Prisma {
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
-    about?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7107,7 +7182,7 @@ export namespace Prisma {
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
-    about?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
   }
@@ -7222,6 +7297,9 @@ export namespace Prisma {
     created?: SortOrder
     updated?: SortOrder
     description?: SortOrder
+    contract?: SortOrder
+    city?: SortOrder
+    country?: SortOrder
     userId?: SortOrder
     position?: SortOrder
     details?: SortOrder
@@ -7240,6 +7318,9 @@ export namespace Prisma {
     created?: SortOrder
     updated?: SortOrder
     description?: SortOrder
+    contract?: SortOrder
+    city?: SortOrder
+    country?: SortOrder
     userId?: SortOrder
     position?: SortOrder
     details?: SortOrder
@@ -7253,6 +7334,9 @@ export namespace Prisma {
     created?: SortOrder
     updated?: SortOrder
     description?: SortOrder
+    contract?: SortOrder
+    city?: SortOrder
+    country?: SortOrder
     userId?: SortOrder
     position?: SortOrder
     details?: SortOrder
@@ -7444,7 +7528,7 @@ export namespace Prisma {
     telegram?: SortOrder
     city?: SortOrder
     country?: SortOrder
-    about?: SortOrder
+    summary?: SortOrder
     created?: SortOrder
     updated?: SortOrder
   }
@@ -7464,7 +7548,7 @@ export namespace Prisma {
     telegram?: SortOrder
     city?: SortOrder
     country?: SortOrder
-    about?: SortOrder
+    summary?: SortOrder
     created?: SortOrder
     updated?: SortOrder
   }
@@ -7480,7 +7564,7 @@ export namespace Prisma {
     telegram?: SortOrder
     city?: SortOrder
     country?: SortOrder
-    about?: SortOrder
+    summary?: SortOrder
     created?: SortOrder
     updated?: SortOrder
   }
@@ -7918,7 +8002,7 @@ export namespace Prisma {
     telegram?: string | null
     city?: string | null
     country?: string | null
-    about?: string | null
+    summary?: string | null
     created?: Date | string
     updated?: Date | string
     skills?: UserSkillCreateNestedManyWithoutUserInput
@@ -7935,7 +8019,7 @@ export namespace Prisma {
     telegram?: string | null
     city?: string | null
     country?: string | null
-    about?: string | null
+    summary?: string | null
     created?: Date | string
     updated?: Date | string
     skills?: UserSkillUncheckedCreateNestedManyWithoutUserInput
@@ -7967,7 +8051,7 @@ export namespace Prisma {
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
-    about?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     skills?: UserSkillUpdateManyWithoutUserNestedInput
@@ -7984,7 +8068,7 @@ export namespace Prisma {
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
-    about?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     skills?: UserSkillUncheckedUpdateManyWithoutUserNestedInput
@@ -8119,6 +8203,9 @@ export namespace Prisma {
     created?: Date | string
     updated?: Date | string
     description?: string | null
+    contract?: string | null
+    city?: string | null
+    country?: string | null
     position?: string | null
     details?: string | null
   }
@@ -8131,6 +8218,9 @@ export namespace Prisma {
     created?: Date | string
     updated?: Date | string
     description?: string | null
+    contract?: string | null
+    city?: string | null
+    country?: string | null
     position?: string | null
     details?: string | null
   }
@@ -8190,6 +8280,9 @@ export namespace Prisma {
     created?: DateTimeFilter<"Job"> | Date | string
     updated?: DateTimeFilter<"Job"> | Date | string
     description?: StringNullableFilter<"Job"> | string | null
+    contract?: StringNullableFilter<"Job"> | string | null
+    city?: StringNullableFilter<"Job"> | string | null
+    country?: StringNullableFilter<"Job"> | string | null
     userId?: IntFilter<"Job"> | number
     position?: StringNullableFilter<"Job"> | string | null
     details?: StringNullableFilter<"Job"> | string | null
@@ -8221,7 +8314,7 @@ export namespace Prisma {
     telegram?: string | null
     city?: string | null
     country?: string | null
-    about?: string | null
+    summary?: string | null
     created?: Date | string
     updated?: Date | string
     job?: JobCreateNestedManyWithoutUserInput
@@ -8238,7 +8331,7 @@ export namespace Prisma {
     telegram?: string | null
     city?: string | null
     country?: string | null
-    about?: string | null
+    summary?: string | null
     created?: Date | string
     updated?: Date | string
     job?: JobUncheckedCreateNestedManyWithoutUserInput
@@ -8286,7 +8379,7 @@ export namespace Prisma {
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
-    about?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     job?: JobUpdateManyWithoutUserNestedInput
@@ -8303,7 +8396,7 @@ export namespace Prisma {
     telegram?: NullableStringFieldUpdateOperationsInput | string | null
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
-    about?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     job?: JobUncheckedUpdateManyWithoutUserNestedInput
@@ -8376,6 +8469,9 @@ export namespace Prisma {
     created?: Date | string
     updated?: Date | string
     description?: string | null
+    contract?: string | null
+    city?: string | null
+    country?: string | null
     position?: string | null
     details?: string | null
   }
@@ -8391,6 +8487,9 @@ export namespace Prisma {
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    contract?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -8403,6 +8502,9 @@ export namespace Prisma {
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    contract?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
   }
@@ -8415,6 +8517,9 @@ export namespace Prisma {
     created?: DateTimeFieldUpdateOperationsInput | Date | string
     updated?: DateTimeFieldUpdateOperationsInput | Date | string
     description?: NullableStringFieldUpdateOperationsInput | string | null
+    contract?: NullableStringFieldUpdateOperationsInput | string | null
+    city?: NullableStringFieldUpdateOperationsInput | string | null
+    country?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
   }
