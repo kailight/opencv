@@ -259,8 +259,8 @@ export namespace Prisma {
   export import Exact = $Public.Exact
 
   /**
-   * Prisma Client JS version: 8.1.0-dev.7
-   * Query Engine version: d1b3f377ca835d73fd50954a5e22128b9ebdd6b8
+   * Prisma Client JS version: 7.10.0
+   * Query Engine version: 0edf323efd1d98336f3f0a68684b56f689b900d3
    */
   export type PrismaVersion = {
     client: string
@@ -1354,6 +1354,7 @@ export namespace Prisma {
     country: string | null
     userId: number | null
     position: string | null
+    summary: string | null
     details: string | null
   }
 
@@ -1370,6 +1371,7 @@ export namespace Prisma {
     country: string | null
     userId: number | null
     position: string | null
+    summary: string | null
     details: string | null
   }
 
@@ -1386,6 +1388,7 @@ export namespace Prisma {
     country: number
     userId: number
     position: number
+    summary: number
     details: number
     _all: number
   }
@@ -1414,6 +1417,7 @@ export namespace Prisma {
     country?: true
     userId?: true
     position?: true
+    summary?: true
     details?: true
   }
 
@@ -1430,6 +1434,7 @@ export namespace Prisma {
     country?: true
     userId?: true
     position?: true
+    summary?: true
     details?: true
   }
 
@@ -1446,6 +1451,7 @@ export namespace Prisma {
     country?: true
     userId?: true
     position?: true
+    summary?: true
     details?: true
     _all?: true
   }
@@ -1549,6 +1555,7 @@ export namespace Prisma {
     country: string | null
     userId: number
     position: string | null
+    summary: string | null
     details: string | null
     _count: JobCountAggregateOutputType | null
     _avg: JobAvgAggregateOutputType | null
@@ -1584,6 +1591,7 @@ export namespace Prisma {
     country?: boolean
     userId?: boolean
     position?: boolean
+    summary?: boolean
     details?: boolean
     user?: boolean | UserDefaultArgs<ExtArgs>
   }, ExtArgs["result"]["job"]>
@@ -1603,10 +1611,11 @@ export namespace Prisma {
     country?: boolean
     userId?: boolean
     position?: boolean
+    summary?: boolean
     details?: boolean
   }
 
-  export type JobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "start" | "finish" | "created" | "updated" | "description" | "contract" | "city" | "country" | "userId" | "position" | "details", ExtArgs["result"]["job"]>
+  export type JobOmit<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = $Extensions.GetOmit<"id" | "title" | "start" | "finish" | "created" | "updated" | "description" | "contract" | "city" | "country" | "userId" | "position" | "summary" | "details", ExtArgs["result"]["job"]>
   export type JobInclude<ExtArgs extends $Extensions.InternalArgs = $Extensions.DefaultArgs> = {
     user?: boolean | UserDefaultArgs<ExtArgs>
   }
@@ -1629,6 +1638,7 @@ export namespace Prisma {
       country: string | null
       userId: number
       position: string | null
+      summary: string | null
       details: string | null
     }, ExtArgs["result"]["job"]>
     composites: {}
@@ -2012,6 +2022,7 @@ export namespace Prisma {
     readonly country: FieldRef<"Job", 'String'>
     readonly userId: FieldRef<"Job", 'Int'>
     readonly position: FieldRef<"Job", 'String'>
+    readonly summary: FieldRef<"Job", 'String'>
     readonly details: FieldRef<"Job", 'String'>
   }
     
@@ -6400,6 +6411,7 @@ export namespace Prisma {
     country: 'country',
     userId: 'userId',
     position: 'position',
+    summary: 'summary',
     details: 'details'
   };
 
@@ -6473,6 +6485,7 @@ export namespace Prisma {
     city: 'city',
     country: 'country',
     position: 'position',
+    summary: 'summary',
     details: 'details'
   };
 
@@ -6561,6 +6574,7 @@ export namespace Prisma {
     country?: StringNullableFilter<"Job"> | string | null
     userId?: IntFilter<"Job"> | number
     position?: StringNullableFilter<"Job"> | string | null
+    summary?: StringNullableFilter<"Job"> | string | null
     details?: StringNullableFilter<"Job"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }
@@ -6578,6 +6592,7 @@ export namespace Prisma {
     country?: SortOrderInput | SortOrder
     userId?: SortOrder
     position?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
     details?: SortOrderInput | SortOrder
     user?: UserOrderByWithRelationInput
     _relevance?: JobOrderByRelevanceInput
@@ -6599,6 +6614,7 @@ export namespace Prisma {
     country?: StringNullableFilter<"Job"> | string | null
     userId?: IntFilter<"Job"> | number
     position?: StringNullableFilter<"Job"> | string | null
+    summary?: StringNullableFilter<"Job"> | string | null
     details?: StringNullableFilter<"Job"> | string | null
     user?: XOR<UserScalarRelationFilter, UserWhereInput>
   }, "id">
@@ -6616,6 +6632,7 @@ export namespace Prisma {
     country?: SortOrderInput | SortOrder
     userId?: SortOrder
     position?: SortOrderInput | SortOrder
+    summary?: SortOrderInput | SortOrder
     details?: SortOrderInput | SortOrder
     _count?: JobCountOrderByAggregateInput
     _avg?: JobAvgOrderByAggregateInput
@@ -6640,6 +6657,7 @@ export namespace Prisma {
     country?: StringNullableWithAggregatesFilter<"Job"> | string | null
     userId?: IntWithAggregatesFilter<"Job"> | number
     position?: StringNullableWithAggregatesFilter<"Job"> | string | null
+    summary?: StringNullableWithAggregatesFilter<"Job"> | string | null
     details?: StringNullableWithAggregatesFilter<"Job"> | string | null
   }
 
@@ -6895,6 +6913,7 @@ export namespace Prisma {
     city?: string | null
     country?: string | null
     position?: string | null
+    summary?: string | null
     details?: string | null
     user: UserCreateNestedOneWithoutJobInput
   }
@@ -6912,6 +6931,7 @@ export namespace Prisma {
     country?: string | null
     userId: number
     position?: string | null
+    summary?: string | null
     details?: string | null
   }
 
@@ -6926,6 +6946,7 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
     user?: UserUpdateOneRequiredWithoutJobNestedInput
   }
@@ -6943,6 +6964,7 @@ export namespace Prisma {
     country?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: IntFieldUpdateOperationsInput | number
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -6959,6 +6981,7 @@ export namespace Prisma {
     country?: string | null
     userId: number
     position?: string | null
+    summary?: string | null
     details?: string | null
   }
 
@@ -6973,6 +6996,7 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -6989,6 +7013,7 @@ export namespace Prisma {
     country?: NullableStringFieldUpdateOperationsInput | string | null
     userId?: IntFieldUpdateOperationsInput | number
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -7302,6 +7327,7 @@ export namespace Prisma {
     country?: SortOrder
     userId?: SortOrder
     position?: SortOrder
+    summary?: SortOrder
     details?: SortOrder
   }
 
@@ -7323,6 +7349,7 @@ export namespace Prisma {
     country?: SortOrder
     userId?: SortOrder
     position?: SortOrder
+    summary?: SortOrder
     details?: SortOrder
   }
 
@@ -7339,6 +7366,7 @@ export namespace Prisma {
     country?: SortOrder
     userId?: SortOrder
     position?: SortOrder
+    summary?: SortOrder
     details?: SortOrder
   }
 
@@ -8207,6 +8235,7 @@ export namespace Prisma {
     city?: string | null
     country?: string | null
     position?: string | null
+    summary?: string | null
     details?: string | null
   }
 
@@ -8222,6 +8251,7 @@ export namespace Prisma {
     city?: string | null
     country?: string | null
     position?: string | null
+    summary?: string | null
     details?: string | null
   }
 
@@ -8285,6 +8315,7 @@ export namespace Prisma {
     country?: StringNullableFilter<"Job"> | string | null
     userId?: IntFilter<"Job"> | number
     position?: StringNullableFilter<"Job"> | string | null
+    summary?: StringNullableFilter<"Job"> | string | null
     details?: StringNullableFilter<"Job"> | string | null
   }
 
@@ -8473,6 +8504,7 @@ export namespace Prisma {
     city?: string | null
     country?: string | null
     position?: string | null
+    summary?: string | null
     details?: string | null
   }
 
@@ -8491,6 +8523,7 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -8506,6 +8539,7 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
   }
 
@@ -8521,6 +8555,7 @@ export namespace Prisma {
     city?: NullableStringFieldUpdateOperationsInput | string | null
     country?: NullableStringFieldUpdateOperationsInput | string | null
     position?: NullableStringFieldUpdateOperationsInput | string | null
+    summary?: NullableStringFieldUpdateOperationsInput | string | null
     details?: NullableStringFieldUpdateOperationsInput | string | null
   }
 

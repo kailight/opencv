@@ -10,5 +10,5 @@ export class Skill {
   title: string;
 
   @Field(() => SkillGroup)
-  skillGroup: SkillGroup;
+  skillGroup: SkillGroup & {};
 }

@@ -5,7 +5,7 @@ import { PrismaService} from "../prisma/prisma.service.js";
 import { Skill } from '@/skills/skill.model.js';
 import { SkillGroup } from '@/skillGroups/skillGroup.model.js';
 import { CreateSkillGroupInput } from '@/skillGroups/create.skillGroup.dto.js'
-import type { PrismaClient } from '../../src/generated/client/index.js';
+import type { PrismaClient } from '@/generated/client/index.js';
 
 @Resolver(() => SkillGroup)
 export class SkillGroupsResolver {

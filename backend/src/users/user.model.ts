@@ -1,7 +1,7 @@
 import { Field, Int, ObjectType } from '@nestjs/graphql';
+import { SkillGroup } from '@/skillGroups/skillGroup.model.js'
 import { Skill } from '@/skills/skill.model.js'
 import { Job } from '@/jobs/job.model.js'
-import { SkillGroup } from '@/skillGroups/skillGroup.model.js'
 
 @ObjectType()
 export class User {

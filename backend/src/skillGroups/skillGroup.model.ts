@@ -10,5 +10,5 @@ export class SkillGroup {
   title: string;
 
   @Field(() => [Skill], { nullable: 'items' })
-  skills: Skill[];
+  skills: (Skill & {})[];
 }

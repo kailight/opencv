@@ -21,5 +21,12 @@ export default defineNuxtConfig({
         API_BASE_URI: env.API_BASE_URI,
       }
     }
+  },
+  nitro: {
+    // Fixes the Windows path-resolving bug by bundling packages natively
+    noExternals: true,
+    experimental: {
+      inlineChunks: true
+    }
   }
 })

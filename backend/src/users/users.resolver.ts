@@ -66,44 +66,53 @@ export class UsersResolver {
   async getSkillGroups(@Parent() user: User) {
     if (!user || !user.id) return [];
 
-    // 1. Fetch the user's skills and eagerly include the skillGroup details
-    const userSkills = await this.prisma.userSkill.findMany({
-      where: { userId: user.id },
-      include: {
-        skill: {
-          include: {
-            skillGroup: true,
-          },
-        },
-      },
-    });
+    try {
+      // 1. Fetch exactly what we need using a raw query to guarantee clean execution inside Linux containers
+      const rows = await this.prisma.$queryRaw<
+                              Array<{
+                                groupId: number;
+                                groupTitle: string;
+                                skillId: number;
+                                skillTitle: string;
+                              }>
+      >`
+        SELECT 
+          sg.id AS groupId,
+          sg.title AS groupTitle,
+          s.id AS skillId,
+          s.title AS skillTitle
+        FROM users_skills us
+        INNER JOIN skills s ON us.skill_id = s.id
+        INNER JOIN skillgroups sg ON s.skillgroup_id = sg.id
+        WHERE us.user_id = ${user.id}
+        ORDER BY sg.id ASC, s.title ASC
+      `;
 
-    // 2. Group the data using a JavaScript Map
-    const groupMap = new Map<number, any>();
+      // 2. Safely reconstruct the data into the exact format your GraphQL object schema expects
+      const groupMap = new Map<number, any>();
 
-    for (const pivotRecord of userSkills) {
-      const skill = pivotRecord.skill;
-      if (!skill || !skill.skillGroup) continue;
+      for (const row of rows) {
+        if (!groupMap.has(row.groupId)) {
+          groupMap.set(row.groupId, {
+            id: row.groupId,
+            title: row.groupTitle,
+            skills: [],
+          });
+        }
 
-      const group = skill.skillGroup;
-
-      if (!groupMap.has(group.id)) {
-        groupMap.set(group.id, {
-          id: group.id,
-          title: group.title,
-          skills: [], // Initialize an empty array for this group's skills
+        groupMap.get(row.groupId).skills.push({
+          id: row.skillId,
+          title: row.skillTitle,
         });
       }
 
-      // Push the current skill into its respective group container
-      groupMap.get(group.id).skills.push({
-        id: skill.id,
-        title: skill.title,
-      });
+      // 3. Always return an array to fulfill the non-nullable constraint
+      return Array.from(groupMap.values());
+    } catch (error) {
+      console.error('Failed to resolve grouped skillGroups inside container:', error);
+      return []; // Safe fallback prevents 'Cannot return null' crashes
     }
 
-    // 3. Return an array of the grouped objects matching your GraphQL expectations
-    return Array.from(groupMap.values());
   }
 
   @Mutation(() => User)
@@ -113,14 +122,14 @@ export class UsersResolver {
       @Args('nickName') nickName: string,
       @Args('email') email: string,
       @Args('password') password: string,
-      @Args('phone') phone: string,
-      @Args('telegram') telegram: string,
-      @Args('city') city: string,
-      @Args('country') country: string,
-      @Args('about') about: string,
+      @Args('phone') phone?: string,
+      @Args('telegram') telegram?: string,
+      @Args('city') city?: string,
+      @Args('country') country?: string,
+      @Args('summary') summary?: string,
   ) {
     return this.prisma.user.create({
-      data: { firstName, lastName, nickName, email, password, phone, telegram, city, country, about },
+      data: { firstName, lastName, nickName, email, password, phone, telegram, city, country, summary },
     });
   }
 

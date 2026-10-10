@@ -24,12 +24,12 @@ exports.Prisma = Prisma
 exports.$Enums = {}
 
 /**
- * Prisma Client JS version: 8.1.0-dev.7
- * Query Engine version: d1b3f377ca835d73fd50954a5e22128b9ebdd6b8
+ * Prisma Client JS version: 7.10.0
+ * Query Engine version: 0edf323efd1d98336f3f0a68684b56f689b900d3
  */
 Prisma.prismaVersion = {
-  client: "8.1.0-dev.7",
-  engine: "d1b3f377ca835d73fd50954a5e22128b9ebdd6b8"
+  client: "7.10.0",
+  engine: "0edf323efd1d98336f3f0a68684b56f689b900d3"
 }
 
 Prisma.PrismaClientKnownRequestError = () => {
@@ -133,6 +133,7 @@ exports.Prisma.JobScalarFieldEnum = {
   country: 'country',
   userId: 'userId',
   position: 'position',
+  summary: 'summary',
   details: 'details'
 };
 
@@ -185,6 +186,7 @@ exports.Prisma.JobOrderByRelevanceFieldEnum = {
   city: 'city',
   country: 'country',
   position: 'position',
+  summary: 'summary',
   details: 'details'
 };
 

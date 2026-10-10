@@ -12,13 +12,18 @@ import { ServeStaticModule } from '@nestjs/serve-static';
 @Module({
   imports: [
     ServeStaticModule.forRoot({
-      rootPath: '../client',
-      exclude: ['/graphql'], // Do not intercept your GraphQL API endpoint
+      rootPath: join(process.cwd(), 'client'),
+      serveRoot: '/',
+      serveStaticOptions: {
+        index: 'index.html',
+      },
+      exclude: ['/graphql', '/graphql/(.*)'],
     }),
     GraphQLModule.forRoot<ApolloDriverConfig>({
       driver: ApolloDriver,
       autoSchemaFile: join(process.cwd(), 'src/schema.gql'), // Saves schema to file system
       // autoSchemaFile: true, // to keep schema in-memory
+      csrfPrevention: false,
     }),
     UsersModule,
     PrismaModule,
