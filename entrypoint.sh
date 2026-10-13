@@ -1,6 +1,9 @@
 #!/bin/sh
 # set -e
 
+# 👇 Use Render UI environment variable or fallback to a secure default string
+DB_PASS="${DATABASE_PASSWORD:secure_password}"
+
 echo "➡️ 1. Starting temporary local MySQL service for initialization..."
 mysqld --user=mysql --skip-networking --lower-case-table-names=1 &
 PID=$!
@@ -10,13 +13,17 @@ until mysqladmin ping --socket=/run/mysqld/mysqld.sock --silent; do
   sleep 1
 done
 
-echo "➡️ 2. Setting up user permissions and base database..."
+echo "➡️ 2. Setting up user permissions and base database with password security..."
 mysql -e "
   CREATE DATABASE IF NOT EXISTS my_app_db;
-  CREATE USER IF NOT EXISTS 'app_user'@'127.0.0.1' IDENTIFIED BY '';
+  CREATE USER IF NOT EXISTS 'app_user'@'127.0.0.1' IDENTIFIED BY '${DB_PASS}';
+  ALTER USER 'app_user'@'127.0.0.1' IDENTIFIED BY '${DB_PASS}';
   GRANT ALL PRIVILEGES ON my_app_db.* TO 'app_user'@'127.0.0.1';
-  CREATE USER IF NOT EXISTS 'app_user'@'localhost' IDENTIFIED BY '';
+
+  CREATE USER IF NOT EXISTS 'app_user'@'localhost' IDENTIFIED BY '${DB_PASS}';
+  ALTER USER 'app_user'@'localhost' IDENTIFIED BY '${DB_PASS}';
   GRANT ALL PRIVILEGES ON my_app_db.* TO 'app_user'@'localhost';
+
   FLUSH PRIVILEGES;
 "
 
