@@ -16,13 +16,21 @@ done
 echo "➡️ 2. Setting up user permissions and base database with password security..."
 mysql -e "
   CREATE DATABASE IF NOT EXISTS my_app_db;
-  CREATE USER IF NOT EXISTS 'app_user'@'127.0.0.1' IDENTIFIED BY '${DB_PASS}';
-  ALTER USER 'app_user'@'127.0.0.1' IDENTIFIED BY '${DB_PASS}';
-  GRANT ALL PRIVILEGES ON my_app_db.* TO 'app_user'@'127.0.0.1';
 
-  CREATE USER IF NOT EXISTS 'app_user'@'localhost' IDENTIFIED BY '${DB_PASS}';
-  ALTER USER 'app_user'@'localhost' IDENTIFIED BY '${DB_PASS}';
+  -- Clear out old profiles to prevent conflicting credential states
+  DROP USER IF EXISTS 'app_user'@'127.0.0.1';
+  DROP USER IF EXISTS 'app_user'@'localhost';
+  DROP USER IF EXISTS 'app_user'@'%';
+
+  -- Create clean users using the environment variable directly (with a safe fallback if empty)
+  CREATE USER 'app_user'@'127.0.0.1' IDENTIFIED BY '${DATABASE_PASSWORD:-prod_secure_pass_2026}';
+  CREATE USER 'app_user'@'localhost' IDENTIFIED BY '${DATABASE_PASSWORD:-prod_secure_pass_2026}';
+  CREATE USER 'app_user'@'%' IDENTIFIED BY '${DATABASE_PASSWORD:-prod_secure_pass_2026}';
+
+  -- Grant full permissions across all matching scopes
+  GRANT ALL PRIVILEGES ON my_app_db.* TO 'app_user'@'127.0.0.1';
   GRANT ALL PRIVILEGES ON my_app_db.* TO 'app_user'@'localhost';
+  GRANT ALL PRIVILEGES ON my_app_db.* TO 'app_user'@'%';
 
   FLUSH PRIVILEGES;
 "
