@@ -33,6 +33,32 @@ query {
 }
 `)
 
+const skillsQuery = ref(`
+query {
+  skills {
+    id
+    title
+    skillGroup {
+      id
+      title
+    }
+  }
+}
+`)
+
+const skillsAndSkillGroupsQuery = ref(`
+query {
+  skills {
+    id
+    title
+  }
+  skillGroups {
+    id
+    title
+  }
+}
+`)
+
 const mutationQuery = ref(`
 mutation {
   createSkillGroup(input: { title: "Soft Skills / Management" }) {
@@ -52,25 +78,49 @@ const req2 = async () => {
   res2.value = JSON.stringify(data, null, 2)
 }
 
+const req3 = async () => {
+  const data = await graphql(skillsQuery.value)
+  res3.value = JSON.stringify(data, null, 2)
+}
+
+const req4 = async () => {
+  const data = await graphql(skillsAndSkillGroupsQuery.value)
+  res4.value = JSON.stringify(data, null, 2)
+}
+
 const res = ref('')
 const res2 = ref('')
+const res3 = ref('')
+const res4 = ref('')
 </script>
 
 <template lang="pug">
 .bg
   .wrapper
-    .box
+    Card(type="alpha")
       code(v-html="usersQuery")
       div
-        button(@click="req()") Test
+        Button(@click="req()") Test
       div
         textarea(v-model="res")
-    .box
+    Card(type="alpha")
       code(v-html="addSkillQuery")
       div
-        button(@click="req2()") Test
+        Button(@click="req2()") Test
       div
         textarea(v-model="res2")
+    Card(type="alpha")
+      code(v-html="skillsQuery")
+      div
+        Button(@click="req3()") Test
+      div
+        textarea(v-model="res3")
+    Card(type="alpha")
+      code(v-html="skillsAndSkillGroupsQuery")
+      div
+        Button(@click="req4()") Test
+      div
+        textarea(v-model="res4")
 </template>
 
 <style lang="stylus" scoped>
@@ -83,6 +133,7 @@ const res2 = ref('')
   display grid
   gap 2rem
   grid-template-columns repeat(auto-fit, minmax(min(20rem, 100%), 1fr));
+  grid-template-rows auto
 .box
   padding 1rem
   border-radius 2rem
@@ -100,4 +151,9 @@ textarea
 code
   white-space pre-wrap
   font-family "Courier New", "Consolas"
+button
+  margin-top 1rem
+  margin-bottom 0.5rem
+  float right
+  font-size 0.8rem
 </style>

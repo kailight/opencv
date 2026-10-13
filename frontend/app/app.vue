@@ -31,4 +31,9 @@ a {
   src: url(/fonts/Montserrat.ttf) format('truetype');
 }
 
+@font-face {
+  font-family: 'Open Sans';
+  src: url(/fonts/OpenSans.ttf) format('truetype');
+}
+
 </style>

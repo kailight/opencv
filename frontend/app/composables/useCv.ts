@@ -15,6 +15,7 @@ const loadCvQueryText = `
       }
     }
     jobs {
+      id,
       title
       position
       start
@@ -44,6 +45,11 @@ export default function useCv() {
     // res.value = JSON.stringify(data, null, 2)
   }
 
+  const updateSummary = async (summary:string="") => {
+    if (!summary) return
+    console.info('updateSummary()', summary.length)
+  }
+
   const user = computed( () => cv?.value?.user )
   const displayName = computed(() => user?.value?.nickName || user?.value?.firstName + ' ' + user?.value?.lastName)
   const roles = computed(() => user?.value?.roles || 'Software Engineer / Team Lead / Solutions Architect')
@@ -60,5 +66,6 @@ export default function useCv() {
     skillGroups,
     summary,
     jobs,
+    updateSummary
   }
 }

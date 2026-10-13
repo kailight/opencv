@@ -1,17 +1,22 @@
-import { defineStore } from 'pinia'
 import type { StoreDefinition } from "pinia"
 
-const UserStore = defineStore('user-store', {
+export interface User {
+  _id: string
+  name: string
+  email: string
+  language: 'en' | 'es' | 'ru'
+}
+
+export default defineEntityStore<User>('user-store', {
   state: () => ({
     _data: {
       language: 'en'
     }
   }),
+  getters: {
+    user: state => state._data,
+  },
   actions: {
-    setUser(userData: any) {
-      console.info('userStore.setUser()', userData);
-      this._data = userData
-    },
     update(userDataPartial:any) {
       console.info('userStore.update()', userDataPartial)
       this._data = { ...this._data, ...userDataPartial }
@@ -19,12 +24,7 @@ const UserStore = defineStore('user-store', {
     reset() {
       const language = this._data.language
       this._data = { language }
-    },
-  },
-  getters: {
-    user: state => state._data,
+    }
   },
   persist: true
-})
-
-export default UserStore as StoreDefinition
+}) as StoreDefinition

@@ -7,7 +7,7 @@ const useBreakpoint = () => {
 
   const breakpoint = computed( () => {
     if (!$viewport) {
-      return 'mobile'
+      return 'desktop'
     }
     if ($viewport?.isLessThan('mobile')) {
       return 'smobile'

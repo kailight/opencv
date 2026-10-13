@@ -22,6 +22,8 @@ section(v-if="viewerSettings.showSkills")
 <style lang="stylus" scoped>
 section
   margin-top 2.5rem
+h3
+  margin 0 0 1rem 0
 .skillgroup
   align-items center
 .skillgroups-grid

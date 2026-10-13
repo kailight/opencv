@@ -5,22 +5,17 @@ console.info('viewerSettings', viewerSettings)
 const {
   displayName,
   roles,
-  skillGroups,
   summary,
-  jobs,
 } = useCv()
 </script>
 
 <template lang="pug">
 section.name-section
-  .name {{displayName}}
+  h2.name {{displayName}}
   .roles {{roles}}
 </template>
 
 <style lang="stylus" scoped>
-.name
-  font-size 2rem
-  font-weight 600
 .roles
   margin-top 1rem
   font-size 1.1rem

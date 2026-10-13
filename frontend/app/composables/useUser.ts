@@ -1,13 +1,10 @@
-import { storeToRefs } from 'pinia'
-
 export default function useUser () {
 
   // const languageCookie = useCookie('language')
   const router = useRouter()
-  const userStore = UserStore()
-  // const { IMAGES_BASE_URI } = useEnv()
-  const { user } = storeToRefs(userStore)
+  const { user } = useStoreRefs(UserStore)
   const { get, post, graphql } = useApi()
+  // const { IMAGES_BASE_URI } = useEnv()
   const { languages } = useLanguages()
 
   const { warning, error, success } = useToaster()
@@ -44,6 +41,7 @@ export default function useUser () {
     // const headers = useRequestHeaders(['cookie'])
     console.info('todo')
     // return await loginUser( { login, password } )
+
   }
 
   const updateAccount = async () => {
@@ -54,7 +52,7 @@ export default function useUser () {
   const signOut = async () => {
     console.info('user.signOut()')
 
-    userStore.reset()
+    UserStore().reset()
     // const { setItems } = useCart()
     // setItems( { _id: undefined } )
     success('Bye!')
@@ -81,9 +79,9 @@ export default function useUser () {
   globalThis.ql = async () => {
     const email = "kailight2020@gmail.com"
     const password = "..."
-    const loggedIn = await signIn({ email, password } )
+    const loggedIn = await signIn({ email, password })
     if (loggedIn) {
-      success('Quickly logged in as Alexander')
+      success('Quickly logged in')
     }
 
   }
@@ -101,14 +99,13 @@ export default function useUser () {
   const dropAdminPrivileges = () => {
     console.info('user.dropAdminPrivileges()');
 
-    userStore.setUser({
+    UserStore().set({
       ...user.value,
       role: undefined
     })
 
-    success('Bye admin privileges!')
+    success('Admin privileges dropped!')
     router.push('/')
-
   }
 
   // const setCurrency = (currency:string) => {
@@ -128,7 +125,7 @@ export default function useUser () {
     },
     set(language) {
       // languageCookie.value = language
-      userStore.update( { language } )
+      UserStore().update( { language } )
     }
   })
 
@@ -137,7 +134,7 @@ export default function useUser () {
       return user.value?.phone || ''
     },
     set(phone) {
-      userStore.update( { phone } )
+      UserStore().update( { phone } )
     }
   })
 
@@ -146,7 +143,7 @@ export default function useUser () {
       return user.value?.address || {}
     },
     set(address) {
-      userStore.update( { address } )
+      UserStore().update( { address } )
     }
   })
 

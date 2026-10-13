@@ -9,12 +9,25 @@ const {
   summary,
   jobs,
 } = useCv()
+
+const { updateSummary } = useCv()
+const editorMode = ref(false)
+
+const preUpdate = async () => {
+  await updateSummary(summary.value)
+  editorMode.value = false
+}
 </script>
 
 <template lang="pug">
 section.summary(v-if="viewerSettings.showSummary")
   h3 Summary
-  .content(v-html="summary")
+    EditControl(@click="editorMode = !editorMode")
+  .content(v-if="!editorMode" v-html="summary")
+  .editor-wrapper(v-if="editorMode")
+    Editor(v-model="summary" :active="editorMode")
+    SaveButton(@click.prevent.stop="preUpdate") Save
+    CancelButton(@click.prevent.stop="editorMode = false") Cancel
 </template>
 
 <style lang="stylus" scoped>
@@ -22,10 +35,6 @@ section
   margin-top 3rem
   font-size 0.9rem
   line-height 1.3rem
-h3
-  font-size 1.3rem
-  font-weight 600
-  margin 0 0 1rem 0
 p
   margin 0.5rem 0 0 0
 .content

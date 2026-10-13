@@ -59,7 +59,12 @@ type Mutation {
   createUser(firstName: String!, lastName: String!, nickName: String!, email: String!, password: String!, phone: String!, telegram: String!, city: String!, country: String!, summary: String!): User!
   createSkill(title: String!): Skill!
   createJob(title: String!, start: String!, finish: String!, position: String!, description: String!): Job!
+  updateJob(id: Int!, input: UpdateJobInput!): Job!
   createSkillGroup(input: CreateSkillGroupInput!): SkillGroup!
+}
+
+input UpdateJobInput {
+  description: String
 }
 
 input CreateSkillGroupInput {

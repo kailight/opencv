@@ -6,7 +6,9 @@ export default defineNuxtConfig({
   devtools: { enabled: true },
   ssr: false,
   css: [
-    '~/assets/stylus/vars.styl'
+    '~/assets/styles/vars.styl',
+    'quill/dist/quill.snow.css',
+    '~/assets/styles/quill.styl',
   ],
   modules: [
     '@pinia/nuxt',
@@ -28,5 +30,23 @@ export default defineNuxtConfig({
     experimental: {
       inlineChunks: true
     }
+  },
+  vite: {
+    optimizeDeps: {
+      include: [
+        'vue-quilly',
+        'quill/core',
+        // 'katex',
+        'quill',
+      ]
+    }
+  },
+  imports: {
+    presets: [
+      {
+        from: '~/utils/store/factories',
+        imports: ['defineCollectionStore', 'defineEntityStore', 'useStoreRefs']
+      }
+    ],
   }
 })

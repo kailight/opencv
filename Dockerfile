@@ -28,6 +28,11 @@ COPY backend/package.json backend/pnpm-lock.yaml backend/pnpm-workspace.yaml ./
 RUN pnpm install --config.minimum-release-age=0
 
 COPY backend/ ./
+
+# Hax for Reneder.com deploy
+ARG DATABASE_URL
+ENV DATABASE_URL=$DATABASE_URL
+
 RUN pnpm prisma generate
 RUN pnpm run build
 

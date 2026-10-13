@@ -1,0 +1,68 @@
+@css {
+  :root {
+    --h: 30;
+    --s: 14%;
+    --l: 53%;
+    --color-base: hsl(var(--h), var(--s), var(--l));
+
+    --background-color: #f9f9f9;
+    --color-background: var(--background-color);
+    --color-main: var(--color-base);
+
+    --color-success: #6c6;
+    --color-success-hl: #7d7;
+    --color-warning: #c96;
+    --color-danger: #c66;
+    --color-danger-hl: #d55;
+
+    --control-text-color: color-mix(in oklab, var(--color-base) 50%, black);
+    --control-background-color: color-mix(in oklab, var(--color-base) 2%, white);
+    --color-accent: color-mix(in oklab, var(--color-base) 40%, #999);
+    --color-accent2: color-mix(in oklab, var(--color-base) 50%, black);
+    --control-border-color: color-mix(in oklab, var(--color-base) 50%, white);
+    --control-border-color-hl: color-mix(in oklab, var(--color-base) 90%, white);
+    --control-border-radius: 0;
+    --font-family-control: "Montserrat";
+  }
+
+  /* Moved outside of :root and added standard CSS punctuation */
+  h1, h2, h3, h4, h5, h6 {
+    margin: 0;
+    font-family: "Montserrat";
+  }
+
+  h1, h2 {
+    font-weight: 700;
+  }
+
+  h2 {
+    font-size: 3rem;
+    line-height: 3rem;
+    margin-bottom: 1.2rem;
+  }
+
+  h3 {
+    font-size: 2.5rem;
+    line-height: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  h4 {
+    font-size: 2rem;
+    line-height: 2rem;
+    margin-bottom: 0.8rem;
+  }
+
+  p {
+    margin: 0 0 0.5rem 0;
+    line-height: 1;
+  }
+
+  p:last-child {
+    margin-bottom: 0;
+  }
+
+  * {
+    box-sizing: border-box;
+  }
+}

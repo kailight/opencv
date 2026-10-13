@@ -60,10 +60,16 @@ export default function useApi() {
 
   }
 
-  const graphql = async (query:string, data:Record<any,any>={}) => {
+  const graphql = async (query:string, data:Record<any,any>={}, id?:number) => {
 
     console.info('query', query)
     console.info('data', data)
+    if (id !== undefined) console.info('id', id)
+
+    // Automatically construct variables formatting numbers correctly for NestJS/Prisma
+    const variables = id !== undefined
+      ? { id, input: data }
+      : data;
 
     const response = await fetch( BASE+'graphql', {
       method: 'POST',
@@ -73,7 +79,7 @@ export default function useApi() {
       },
       body: JSON.stringify({
         query,
-        data,
+        variables,
       }),
     });
 

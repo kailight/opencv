@@ -20,17 +20,17 @@ const breakpoint = useBreakpoint()
 
 
 <template lang="pug">
-  .toaster-wrapper(:class="breakpoint")
-    TransitionGroup(name="toast")
-      .toast(v-for="message in reversedMessages" :key="message.weight" :class="message.class")
-        .colored-area
-          Icon.icon(name="mdi:alert" v-if="message.type === 'error'")
-          Icon.icon(name="mdi:alert" v-if="message.type === 'warning'")
-          Icon.icon(name="mdi:check-circle" v-if="message.type === 'success'")
-        .content
-          .close-wrapper(@click="removeToast(message.weight)")
-            Icon.close(name="mdi:close-thick") close
-          .message(v-html="message.content")
+.toaster-wrapper(:class="breakpoint")
+  TransitionGroup(name="toast")
+    .toast(v-for="message in reversedMessages" :key="message.weight" :class="message.class")
+      .colored-area
+        Icon.icon(name="mdi:alert" v-if="message.type === 'error'")
+        Icon.icon(name="mdi:alert" v-if="message.type === 'warning'")
+        Icon.icon(name="mdi:check-circle" v-if="message.type === 'success'")
+      .content
+        .close-wrapper(@click="removeToast(message.weight)")
+          Icon.close(name="mdi:close-thick") close
+        .message(v-html="message.content")
 </template>
 
 

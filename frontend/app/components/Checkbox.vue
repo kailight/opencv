@@ -1,55 +1,75 @@
 <script setup>
 const props = defineProps({
-  modelValue : {
+  modelValue: {
     type: Boolean,
-    required: true,
     default: false
   },
 });
+const emit = defineEmits([
+  'update:modelValue',
+  'update'
+])
 
-let modelValue = toRef(props.modelValue)
-const checked = ref(modelValue.value)
-
-const emit = defineEmits({
-  update() {
-    return true
-  },
-  'update:modelValue': (newValue) => {
-    return true
-  }
-})
-
-const update = (e) => {
-  // console.info('update', e.target.checked)
-  const checked = e.target.checked
-  if (checked) {
-    modelValue = true
-  } else {
-    modelValue = false
-  }
-  emit('update:modelValue',checked)
+const update = () => {
+  const checked = !props.modelValue
+  console.info('update2', checked)
+  emit('update:modelValue', checked)
+  emit('update', checked)
 }
-
-watch(modelValue, (newValue) => {
-  console.info('watcher triggered', newValue)
-  emit('update:modelValue', newValue)
-})
 </script>
 
 <template lang="pug">
-  label.checkbox
-    input(type="checkbox" v-model="modelValue")
-    slot
+label.checkbox(@click="update")
+  .box.enabled(v-if="props.modelValue")
+    .icon-wrapper
+      Icon.icon(name="mdi:check")
+  .box.disabled(v-if="!props.modelValue")
+  slot
 </template>
 
-<style lang="stylus" scoped>
-input
-  margin-right 0.5rem
-  cursor pointer
-label
-  user-select none
-  font-size 1rem
-  display inline-block
-  padding-right 1rem
-  cursor pointer
+<style lang="css" scoped>
+label.checkbox {
+  --control-background-color: #fff;
+  --background-color: #fff;
+  --control-text-color: #fff;
+  --checkbox-color: var(--color-accent2);
+  display: flex;
+  align-items: center;
+  gap: 0.3rem;
+  letter-spacing: 1px;
+}
+
+.icon {
+  color: var(--checkbox-color);
+  font-size: 0.7rem;
+  font-weight: 600;
+  width: 100%;
+  height: 100%;
+}
+.icon-wrapper {
+  display: inline-flex;
+  width: 100%;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+}
+div.box {
+  width: 1rem;
+  height: 1rem;
+  display: inline-block;
+  margin-right: 0.3rem;
+}
+div.enabled {
+  border: 1px solid var(--control-text-color);
+  background-color: var(--background-color);
+}
+div.disabled {
+  border: 1px solid var(--control-text-color);
+  background-color: var(--background-color);
+}
+label {
+  user-select: none;
+  padding: 0.2rem;
+  cursor: pointer;
+}
 </style>

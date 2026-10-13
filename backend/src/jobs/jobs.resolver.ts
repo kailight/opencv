@@ -1,10 +1,11 @@
-import { Resolver, Query, Mutation, Args, Parent, ResolveField, Int } from '@nestjs/graphql';
+import { Resolver, Query, Mutation, Args, Parent, ResolveField, Int, InputType, Field, ID } from '@nestjs/graphql';
 import { Inject } from '@nestjs/common';
 import { PRISMA_TOKEN } from '@/prisma/prisma.module.js';
 import { PrismaService} from "../prisma/prisma.service.js";
 import { Job } from '@/jobs/job.model.js';
 import { User } from '@/users/user.model.js';
 import { SkillGroup } from '@/skillGroups/skillGroup.model.js';
+import { UpdateJobInput } from './update.job.dto.js'
 import type { PrismaClient } from '../../src/generated/client/index.js';
 
 @Resolver(() => Job)
@@ -30,6 +31,8 @@ export class JobsResolver {
     });
   }
 
+
+
   @Mutation(() => Job)
   async createJob(
       @Args('title') title: string,
@@ -40,6 +43,17 @@ export class JobsResolver {
   ) {
     return this.prisma.skill.create({
       data: { title, start, finish, position, description },
+    });
+  }
+
+  @Mutation(() => Job, { name: 'updateJob' })
+  async updateJob(
+    @Args('id', { type: () => Int }) id: number,
+    @Args('input') input: UpdateJobInput,
+  ) {
+    return this.prisma.job.update({
+      where: { id: Number(id) },
+      data: input,
     });
   }
 

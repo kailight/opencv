@@ -50,7 +50,7 @@ main
   position relative
   min-height 100vh
   margin-top 5rem
-  width calc(70vw - 4rem)
+  width calc(70vw)
   left 30vw
   background-color #eee
   gap 1rem
