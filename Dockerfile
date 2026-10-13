@@ -11,8 +11,10 @@ COPY frontend/package.json frontend/pnpm-lock.yaml frontend/pnpm-workspace.yaml 
 RUN pnpm install --config.minimum-release-age=0
 
 COPY frontend/ ./
-ENV NUXT_PUBLIC_API_BASE_URI=http://localhost:4000/
-ENV API_BASE_URI=http://localhost:4000/
+
+ENV API_BASE_URI="/"
+ENV NUXT_PUBLIC_API_BASE_URI="/"
+
 RUN pnpm run generate
 
 # ==========================================

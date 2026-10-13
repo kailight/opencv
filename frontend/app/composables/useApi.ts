@@ -24,6 +24,46 @@ export default function useApi() {
     console.error('API_BASE_URI is not set in .env');
   }
 
+  const graphql = async (query:string, data:Record<any,any>={}, id?:number) => {
+
+    console.info('query', query)
+    console.info('data', data)
+    if (id !== undefined) console.info('id', id)
+
+    // Automatically construct variables formatting numbers correctly for NestJS/Prisma
+    const variables = id !== undefined
+                            ? { id, input: data }
+                            : data;
+
+    const response = await fetch( BASE+'graphql', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      },
+      body: JSON.stringify({
+        query,
+        variables,
+      }),
+    });
+
+    console.info('response', response)
+
+    const result = await response.json();
+
+    if (result.errors) {
+      console.error('GraphQL Errors:', result.errors);
+      error(result.errors[0]?.message || 'Failed to fetch GraphQL data');
+      // throw new Error('Failed to fetch GraphQL data');
+    }
+
+    console.info('result.data', result.data);
+
+    return result.data;
+  }
+
+
+
   const router = useRouter()
 
   const headers = computed( () => {
@@ -58,44 +98,6 @@ export default function useApi() {
       }
     }
 
-  }
-
-  const graphql = async (query:string, data:Record<any,any>={}, id?:number) => {
-
-    console.info('query', query)
-    console.info('data', data)
-    if (id !== undefined) console.info('id', id)
-
-    // Automatically construct variables formatting numbers correctly for NestJS/Prisma
-    const variables = id !== undefined
-      ? { id, input: data }
-      : data;
-
-    const response = await fetch( BASE+'graphql', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      },
-      body: JSON.stringify({
-        query,
-        variables,
-      }),
-    });
-
-    console.info('response', response)
-
-    const result = await response.json();
-
-    if (result.errors) {
-      console.error('GraphQL Errors:', result.errors);
-      error(result.errors[0]?.message || 'Failed to fetch GraphQL data');
-      // throw new Error('Failed to fetch GraphQL data');
-    }
-
-    console.info('result.data', result.data);
-
-    return result.data;
   }
 
 
