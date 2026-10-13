@@ -66,11 +66,9 @@ RUN dos2unix /entrypoint.sh && chmod +x /entrypoint.sh
 
 ENV NODE_ENV=production
 ENV PORT=4000
-ENV DATABASE_URL="mysql://app_user:@127.0.0.1:3306/my_app_db"
 ENV DATABASE_HOST=127.0.0.1
 ENV DATABASE_PORT=3306
 ENV DATABASE_USER=app_user
-ENV DATABASE_PASSWORD=
 ENV DATABASE_NAME=my_app_db
 ENV RUN_SEED=true
 

@@ -3,7 +3,7 @@ import mysql from 'mysql2/promise';
 async function main() {
   console.log('🌱 Starting Native Seeding Process...');
 
-  const databaseUrl = process.env.DATABASE_URL || "mysql://app_user:@127.0.0.1:3306/my_app_db";
+  const databaseUrl = process.env.DATABASE_URL || "mysql://app_user:secure_password@127.0.0.1:3306/my_app_db";
 
   // Open direct database stream
   const connection = await mysql.createConnection(databaseUrl);
