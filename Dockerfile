@@ -29,9 +29,10 @@ RUN pnpm install --config.minimum-release-age=0
 
 COPY backend/ ./
 
-# Hax for Reneder.com deploy
-ARG DATABASE_URL
-ENV DATABASE_URL=$DATABASE_URL
+# HAXXX for Reneder.com deploy
+# 👇 THE FIX: Hardcode a placeholder format string directly inside Stage 2.
+# This prevents PrismaConfigEnvError during build compilation.
+ENV DATABASE_URL="mysql://placeholder_user:placeholder_pass@127.0.0.1:3306/placeholder_db"
 
 RUN pnpm prisma generate
 RUN pnpm run build
