@@ -48,20 +48,28 @@ until mysqladmin ping --host=127.0.0.1 --port=3306 --protocol=tcp --silent; do
 done
 
 echo "➡️ 4. Syncing database schema via Prisma..."
-# Explicitly pass NODE_ENV=development so Prisma can parse prisma.config.ts properly
+# Ensure DATABASE_PASSWORD exists from your Render Dashboard UI
+if [ -z "$DATABASE_PASSWORD" ]; then
+  echo "❌ ERROR: DATABASE_PASSWORD environment variable is missing in Render UI!"
+  exit 1
+fi
+
+# 👇 This builds the URL safely inside the container's volatile memory at boot time
+export DATABASE_URL="mysql://app_user:${DATABASE_PASSWORD}@127.0.0.1:3306/my_app_db"
+
+# Sync schema with explicit environment mapping
 NODE_ENV=development pnpm prisma db push --accept-data-loss || {
-  echo "⚠️ WARNING: Prisma schema sync failed, but keeping container alive..."
+  echo "⚠️ WARNING: Prisma schema sync failed..."
 }
 
 if [ "$RUN_SEED" = "true" ]; then
   echo "🌱 5. Automatic execution: Seeding data tables..."
-  # Run via tsx with development flags to allow on-the-fly TypeScript compilation
   NODE_ENV=development npx tsx ./prisma/seed/seed.ts || {
-    echo "⚠️ WARNING: Database seeding failed, skipping..."
+    echo "⚠️ WARNING: Database seeding failed..."
   }
 else
   echo "⏭️ Skipping automatic data seeding (RUN_SEED is not set to true)."
 fi
 
 echo "🚀 6. Launching production NestJS Backend application layers..."
-exec node dist/main.js
+NODE_ENV=production exec node dist/main.js
